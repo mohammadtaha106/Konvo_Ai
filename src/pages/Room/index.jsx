@@ -35,7 +35,7 @@ const Roompage = () => {
       sharedLinks: [
         {
           name: "Copy Link",
-          url: `${VITE_BASE_URL}/room/${roomid}`,
+          url: `${import.meta.env.VITE_BASE_URL}/room/${roomid}`,
         },
       ],
       scenario: {

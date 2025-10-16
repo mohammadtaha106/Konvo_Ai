@@ -7,7 +7,7 @@ import MeetingDrawer from "../components/MeetingDrawer";
 
 
 function Homepage() {
-  const [value, setValue] = useState("");
+ 
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
   const [loading, setLoading] = useReactState(false);
@@ -39,7 +39,8 @@ const handleCreateMeeting = useCallback(async () => {
 
 
   return (<>
-    <MeetingDrawer/>
+  {(user)&& <MeetingDrawer/> }
+   
     <div className="min-h-screen bg-black text-white overflow-hidden relative">
       {/* background effects */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-black to-purple-900/20"></div>

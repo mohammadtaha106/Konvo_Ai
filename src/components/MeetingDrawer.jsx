@@ -62,6 +62,9 @@ const MeetingDrawer = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
 
+ 
+  
+
   useEffect(() => {
     const fetchMeetings = async () => {
       setIsLoading(true);
@@ -72,35 +75,46 @@ const MeetingDrawer = () => {
     fetchMeetings();
   }, []);
 
-  const handleViewTranscript = async (meeting) => {
-    setSelectedMeeting(meeting);
-    setIsDrawerOpen(true);
-    setTranscript("");
-    setSummary("");
-    setLoadingTranscript(true);
-    try {
-      const res = await transcribeAudio(meeting.audioUrl);
-      setTranscript(res.text || "No transcript available.");
-    } catch (err) {
-      setTranscript("Error fetching transcript.");
-    } finally {
-      setLoadingTranscript(false);
-    }
-  };
 
-  const handleSummarize = async () => {
-    if (!transcript) return;
-    setSummary("");
-    setLoadingSummary(true);
-    try {
-      const res = await summarizeMeeting(transcript);
-      setSummary(res.summary);
-    } catch {
-      setSummary("Failed to summarize.");
-    } finally {
-      setLoadingSummary(false);
-    }
-  };
+
+  
+  const handleViewTranscript = async (meeting) => {
+
+    
+  setSelectedMeeting(meeting);
+  setIsDrawerOpen(true);
+  setTranscript("");
+  setSummary("");
+  setLoadingTranscript(true);
+
+  try {
+    const res = await transcribeAudio(meeting.audioUrl, meeting.meetingId); 
+    setTranscript(res.text || "No transcript available.");
+  } catch (err) {
+    console.error("Error in transcription:", err);
+    setTranscript("Error fetching transcript.");
+  } finally {
+    setLoadingTranscript(false);
+  }
+};
+
+
+const handleSummarize = async () => {
+  if (!transcript || !selectedMeeting?._id) return;
+
+
+  setSummary("");
+  setLoadingSummary(true);
+  try {
+    const res = await summarizeMeeting(transcript, selectedMeeting.meetingId);
+    setSummary(res.summary);
+  } catch {
+    setSummary("Failed to summarize.");
+  } finally {
+    setLoadingSummary(false);
+  }
+};
+
 
   const closeDrawer = () => {
     setIsDrawerOpen(false);

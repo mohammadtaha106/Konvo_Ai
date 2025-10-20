@@ -9,7 +9,10 @@ export const createMeeting = async (meetingId) => {
 
 export const getMeetings = async () => {
   const { data } = await API.get("/recordings");
+   console.log('Fetched meetings data:', data);
   return data;
+ 
+  
 };
 
 export const useMeetings = () => {

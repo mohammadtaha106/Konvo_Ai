@@ -80,6 +80,8 @@ const MeetingDrawer = () => {
   
   const handleViewTranscript = async (meeting) => {
 
+console.log(meeting)
+
     
   setSelectedMeeting(meeting);
   setIsDrawerOpen(true);

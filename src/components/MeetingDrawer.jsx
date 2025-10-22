@@ -83,7 +83,7 @@ const MeetingDrawer = () => {
     
   setSelectedMeeting(meeting);
   setIsDrawerOpen(true);
-  setTranscript("");
+  setTranscript(meeting?.transcriptText ?? "");
   setSummary("");
   setLoadingTranscript(true);
 

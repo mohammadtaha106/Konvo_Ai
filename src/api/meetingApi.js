@@ -4,6 +4,8 @@ import { useQuery } from "@tanstack/react-query";
 
 export const createMeeting = async (meetingId) => {
   const { data } = await API.post("/recordings/meeting", { meetingId });
+  console.log('Meeting data:', data);
+  
   return data;
 };
 

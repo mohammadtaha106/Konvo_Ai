@@ -92,6 +92,7 @@ console.log(meeting)
   try {
     const res = await transcribeAudio(meeting.audioUrl, meeting.meetingId); 
     setTranscript(res.text || "No transcript available.");
+    console.log("Transcription result:", res.text);
   } catch (err) {
     console.error("Error in transcription:", err);
     setTranscript("Error fetching transcript.");
@@ -358,7 +359,7 @@ const handleSummarize = async () => {
                         {loadingSummary ? (
                           <>
                             <Loader2 className="w-5 h-5 animate-spin" />
-                            <span>AI is thinking...</span>
+                            <span>Konvo is thinking...</span>
                           </>
                         ) : (
                           <>
